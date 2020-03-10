@@ -1,8 +1,9 @@
 import Icons from './icons';
 import tplPlayer from '../template/player.art';
+import utils from './utils';
 
 class Template {
-    constructor (options) {
+    constructor(options) {
         this.container = options.container;
         this.options = options.options;
         this.index = options.index;
@@ -10,20 +11,21 @@ class Template {
         this.init();
     }
 
-    init () {
+    init() {
         this.container.innerHTML = tplPlayer({
             options: this.options,
             index: this.index,
             tran: this.tran,
             icons: Icons,
+            mobile: utils.isMobile,
             video: {
                 current: true,
                 pic: this.options.video.pic,
                 screenshot: this.options.screenshot,
                 preload: this.options.preload,
                 url: this.options.video.url,
-                subtitle: this.options.subtitle
-            }
+                subtitle: this.options.subtitle,
+            },
         });
 
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');
@@ -41,6 +43,7 @@ class Template {
         this.video = this.container.querySelector('.dplayer-video-current');
         this.bezel = this.container.querySelector('.dplayer-bezel-icon');
         this.playButton = this.container.querySelector('.dplayer-play-icon');
+        this.mobilePlayButton = this.container.querySelector('.dplayer-mobile-play');
         this.videoWrap = this.container.querySelector('.dplayer-video-wrap');
         this.controllerMask = this.container.querySelector('.dplayer-controller-mask');
         this.ptime = this.container.querySelector('.dplayer-ptime');
